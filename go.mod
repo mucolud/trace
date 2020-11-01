@@ -1,4 +1,4 @@
-module mucolud/trace
+module github.com/mucolud/trace
 
 go 1.15
 
