@@ -78,8 +78,12 @@ func (tc *TraceContext) convertToError(params []interface{}) error {
 		if err, ok := v.(error); ok && err != nil {
 			res = append(res, err.Error())
 		} else {
-			res = append(res, fmt.Sprintf("%+v",
-				reflect.Indirect(reflect.ValueOf(v)).Interface()))
+			if v == nil {
+				res = append(res, "nil")
+			} else {
+				res = append(res, fmt.Sprintf("%+v",
+					reflect.Indirect(reflect.ValueOf(v)).Interface()))
+			}
 		}
 	}
 	return errors.New(strings.Join(res, ","))
